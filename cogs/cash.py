@@ -12,10 +12,15 @@ class Cash(commands.Cog):
         self.logger = logging.getLogger(__name__)
 
     @commands.command(name='addCash')
-    @commands.has_permissions(administrator=True)
     async def addcash(self, ctx, member: discord.Member = None, cash: int = None):
         """Add Cash to member"""
         
+        # Allow bot owner to bypass permission checks
+        if not await self.bot.is_owner(ctx.author):
+            if not ctx.author.guild_permissions.administrator:
+                await ctx.send("You don't have permissions to use this command.")
+                return
+
         if member is None:
             await ctx.send("Please mention a valid member.")
             return
