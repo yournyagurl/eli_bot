@@ -21,9 +21,9 @@ db_crud = DiscordBotCrud()
 # Load environment variables
 
 load_dotenv()
-bot_token = os.getenv('TOKEN')
+TOKEN = os.getenv('TOKEN')
 CONSOLE = int(os.getenv('CONSOLE'))
-if bot_token is None:
+if TOKEN is None:
     print("ERROR: Bot token not found. Check your .env file.")
     exit(1)
 
@@ -119,7 +119,7 @@ async def Load():
 async def main():
     async with bot:
         await Load()
-        await bot.start(bot_token)
+        await bot.start(TOKEN)
 
 if __name__ == "__main__":
     asyncio.run(main())
